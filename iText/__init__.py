@@ -33,13 +33,16 @@ MainTextArea = Text(
     MainFrame, bg=theme['Theme']['Background'], fg=theme['Theme']['Foreground'])
 MainTextArea.pack(expand=True, fill='both')
 
+
 def linenumber(event=None):
     line, column = MainTextArea.index(END).split('.')
     # Creating line number toolbar
     try:
         LineFrame.pack_forget()
         LineFrame.destroy()
-        
+    except:
+        pass
+
 
 MainTextArea.bind("<Any-KeyPress>", linenumber)
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iText</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            padding: 8px;
+        }
+
+        nav ul li {
+            padding: 0 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #text {
+            width: 95vw;
+            height: 95vh;
+            resize: none;
+        }
+
+        .editor {
+            /* border: 1px solid #999999; */
+            /* margin: 5px 0;
+            padding: 3px; */
+            /* margin: 0 0 0 25px; */
+            display: flex;
+            flex-direction: row;
+        }
+
+        .lines {
+            padding: 10px;
+        }
+
+        .file-menu {
+            display: none;
+            flex-direction: column;
+            border-radius: 10px;
+            position: absolute;
+            /* left: 1%; */
+            background-color: #777;
+            min-width: 160px;
+            /* box-shadow: 0 7px 16px 0 rgba(0,0,0,0.2); */
+            z-index: 1;
+        }
+
+        .show {
+            display: flex;
+        }
+
+        .file-menu a {
+            margin: 0 0 0 5px;
+            padding: 2px;
+        }
+    </style>
+
+    <main>
+        <nav>
+            <ul>
+                <li><a href="#" id="file-main-menu">File</a></li>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">View</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <div class="file-menu" id="file-menu">
+                <a href="#">Open File</a>
+                <a href="#">Open Project</a>
+                <a href="#">Save</a>
+                <a href="#">Save As</a>
+                <a href="#">Exit</a>
+            </div>
+        </nav>
+
+        <div class="editor">
+            <span class="lines" id="lines">1</span>
+            <textarea name="text" id="text"></textarea>
+        </div>
+    </main>
+
+    <script>
+        let file = document.getElementById("file-main-menu");
+
+        file.addEventListener("click", function () {
+            document.getElementById("file-menu").classList.toggle("show");
+        });
+
+        window.addEventListener("click", function (event) {
+            if (!file.contains(event.target)) {
+                document.getElementById("file-menu").classList.remove("show");
+            }
+        })
+        let text_area = document.getElementById("text");
+        let lines = document.getElementById("lines");
+        setInterval(function () {
+            let text_lines = text_area.value.split("\n");
+            lines.innerHTML = '';
+            // console.log(lines);
+            for (let lineCount = 1; lineCount <= text_lines.length; lineCount++) {
+                lines.innerHTML += `${lineCount}<br>`;
+
+            }
+        }, 200);
+    </script>
+
+</body>
+
+</html>
